@@ -10,9 +10,13 @@ angular.module('techNews').controller('LoginController', function ($scope) {
 
     // Public properties
     vm.hello = 'Hello there';
+    vm.email = '';
+    vm.password = '';
 
     function login() {
         console.log('Logging in...');
+        Materialize.toast('Logging in...', 2000);
+        console.log(vm.email, vm.password);
     }
 
 });
