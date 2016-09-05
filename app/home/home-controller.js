@@ -72,19 +72,34 @@ angular.module('techNews').controller('MainController', ['$scope', '$timeout', '
             console.log('Test function ran');
         }
 
-    }]);
+        function getCurrentUser() {
+            firebase.auth().onAuthStateChanged(function (user) {
+                if (user) {
+                    // User is signed in.
+                    var userRef = firebase.database().ref('users/' + user.uid);
+                    userRef.on('value', function (snapshot) {
+                        user = snapshot.val();
+                        console.log('A user is logged in', user);
+                        // Connect back to scope
+                        $timeout(function () {
+                            vm.user = user;
+                        }, 0);
+                    });
+                } else {
+                    console.log('No user is logged in');
+                }
+            });
+        }
 
-function getCurrentUser() {
-    var user = firebase.auth().currentUser;
-    return user;
-}
+        function signOut() {
+            firebase.auth().signOut().then(function () {
+                // Sign-out successful.
+                Materialize.toast('Sign out successful', 2000);
+            }, function (error) {
+                Materialize.toast('Error trying to sign out', 2000);
+                console.log('Error trying to sign out user: ', error);
+            });
+        }
 
-function signOut() {
-    firebase.auth().signOut().then(function () {
-        // Sign-out successful.
-        Materialize.toast('Sign out successful', 2000);
-    }, function (error) {
-        Materialize.toast('Error trying to sign out', 2000);
-        console.log('Error trying to sign out user: ', error);
-    });
-}
+    }]); // End of MainController
+
