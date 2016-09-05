@@ -21,14 +21,14 @@
         <div class="userView">
             <img class="background" src="img/default-article-image.jpg">
             <a href="#profile"><img class="circle" src="img/profile_picture.png"></a>
-            <a href="#profile"><span class="white-text name">Fernando Ramirez</span></a>
-            <a href="#profile"><span class="white-text email">framirez1997@gmail.com</span></a>
+            <a href="#profile"><span class="white-text name">{{mainController.user.firstName}} {{mainController.user.lastName}}</span></a>
+            <a href="#profile"><span class="white-text email">{{mainController.user.email}}</span></a>
         </div>
     </li>
     <li><a class="waves-effect" href="#/"><i class="material-icons">home</i>Home</a></li>
     <li><a class="waves-effect" href="#profile"><i class="material-icons">account_circle</i>Profile</a></li>
     <li><a class="waves-effect" href="#/"><i class="material-icons">motorcycle</i>Item 3</a></li>
-    <li><a class="waves-effect" ng-click="mainController.signOut()" href="#login"><i class="material-icons">security</i>Sign out</a></li>
+    <li ng-show="mainController.user != undefined"><a class="waves-effect" ng-click="mainController.signOut()" href="#login"><i class="material-icons">security</i>Sign out</a></li>
     <li>
         <div class="divider"></div>
     </li>
