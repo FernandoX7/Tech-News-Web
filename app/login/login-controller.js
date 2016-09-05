@@ -1,7 +1,7 @@
 /**
  * Created by fernandoramirez on 9/4/16.
  */
-angular.module('techNews').controller('LoginController', function ($scope) {
+angular.module('techNews').controller('LoginController', function ($location) {
 
     vm = this;
 
@@ -29,36 +29,25 @@ angular.module('techNews').controller('LoginController', function ($scope) {
         email = vm.email;
         password = vm.password;
 
-        firebase.auth().signInWithEmailAndPassword(email, password).catch(function (error) {
+        firebase.auth().signInWithEmailAndPassword(email, password).then(function (user) {
+            // Login was successful
+            Materialize.toast('Successfully logged in', 2000);
+            console.log('Successfully logged in user: ', user);
+            $location.path('/#home');
+        }, function (error) { // Handler Errors
             // Handle Errors here.
             var errorCode = error.code;
             var errorMessage = error.message;
-            // ...
-            console.log('There was an error trying to log in', errorCode, errorMessage);
+            console.log('Error, trying to login a user. \nCode:', errorCode, '\nMessage:', errorMessage);
 
-            // TODO: Handle error codes https://firebase.google.com/docs/reference/js/firebase.auth.Auth#signInWithEmailAndPassword
-            if (errorCode == 'auth/wrong-password') {
-                Materialize.toast('Invalid username or password', 2000);
+            switch (errorCode) {
+                case 'auth/wrong-password':
+                    Materialize.toast('Invalid username or password', 2000);
+                    break;
             }
 
         });
 
-        // firebase.auth().createUserWithEmailAndPassword(email, password).catch(function (error) {
-        //     // Handle Errors here.
-        //     var errorCode = error.code;
-        //     var errorMessage = error.message;
-        //     // ...
-        //     console.log('There was an error trying to register a user', errorCode, errorMessage);
-        // });
-
-        // firebase.auth().signOut().then(function() {
-        //     // Sign-out successful.
-        // }, function(error) {
-        //     // An error happened.
-        // });
-
-        // Materialize.toast('Logging in...', 2000);
-        console.log(vm.email, vm.password);
     }
 
     function signOut() {
