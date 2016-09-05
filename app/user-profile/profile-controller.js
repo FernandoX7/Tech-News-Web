@@ -11,7 +11,9 @@ angular.module('techNews').controller('ProfileController', function ($timeout) {
 
     // Public properties
     vm.isEditingProfile = false;
+    vm.firebaseUser = firebase.auth().currentUser;
     vm.user = {};
+    vm.userUid = '';
 
     function editProfile() {
         vm.isEditingProfile = true;
@@ -22,19 +24,20 @@ angular.module('techNews').controller('ProfileController', function ($timeout) {
         Materialize.toast('Successfully saved your changes', 2000);
     }
 
-    var commentsRef = firebase.database().ref('users/');
-    commentsRef.on('child_added', function (data) {
-        vm.user = {
-            rights: data.val().rights,
-            username: data.val().username,
-            firstName: data.val().firstName,
-            lastName: data.val().lastName,
-            createdDate: data.val().createdDate,
-            uid: data.val().uid
-        };
+    // Get the currently logged in user
+    if (vm.firebaseUser) {
+        // User is signed in.
+        // Set the uid of the firebase user so we can retrieve the user from the db by their uid
+        vm.userUid = vm.firebaseUser.uid;
+    }
+
+    var userRef = firebase.database().ref('users/' + vm.userUid);
+    userRef.on('value', function (snapshot) {
+        vm.user = snapshot.val();
+        // Use $timeout to reconnect the scope
         $timeout(function () {
-            console.log('User is: ', vm.user);
+            console.log('Current user is', vm.user);
         }, 0);
     });
 
-});
+}); // End of ProfileController
