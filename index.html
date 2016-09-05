@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="techNews">
+<head>
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tech-News</title>
+    <!--Roboto Fonts-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
+    <!--Import Google Icon Font-->
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--SASS-->
+    <link rel="stylesheet" type="text/css" href="scss/style.css">
+    <!--Materialize CSS-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
+</head>
+
+<body ng-controller="MainController as mainController" ng-cloak>
+
+<!--Side Menu Navigation-->
+<ul id="slide-out" class="side-nav" style="transform: translateX(0px);">
+    <li>
+        <div class="userView">
+            <img class="background" src="img/default-article-image.jpg">
+            <a href="#profile"><img class="circle" src="img/profile_picture.png"></a>
+            <a href="#profile"><span class="white-text name">Fernando Ramirez</span></a>
+            <a href="#profile"><span class="white-text email">framirez1997@gmail.com</span></a>
+        </div>
+    </li>
+    <li><a class="waves-effect" href="#/"><i class="material-icons">home</i>Home</a></li>
+    <li><a class="waves-effect" href="#profile"><i class="material-icons">account_circle</i>Profile</a></li>
+    <li><a class="waves-effect" href="#/"><i class="material-icons">motorcycle</i>Item 3</a></li>
+    <li>
+        <div class="divider"></div>
+    </li>
+    <li><a class="subheader">Admin</a></li>
+    <li><a class="waves-effect" href="#/new-article"><i class="material-icons">create</i>New Article</a></li>
+    <li><a class="waves-effect" href="#/"><i class="material-icons">home</i>Item 2</a></li>
+    <li><a class="waves-effect" href="#/"><i class="material-icons">home</i>Item 3</a></li>
+    <li class="no-padding">
+        <ul class="collapsible collapsible-accordion">
+            <li>
+                <a class="collapsible-header">Dropdown<i class="material-icons">arrow_drop_down</i></a>
+                <div class="collapsible-body">
+                    <ul>
+                        <li><a href="#!">First</a></li>
+                        <li><a href="#!">Second</a></li>
+                        <li><a href="#!">Third</a></li>
+                        <li><a href="#!">Fourth</a></li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </li>
+</ul>
+
+<!--Toolbar-->
+<div class="navbar-fixed">
+    <!--Dropdown list-->
+    <ul id="dropdown1" class="dropdown-content">
+        <li><a href="#!">One</a></li>
+        <li><a href="#!">Two</a></li>
+        <li class="divider"></li>
+        <li><a href="#!">Settings</a></li>
+    </ul>
+    <nav class="toolbar">
+        <div class="nav-wrapper">
+            <a href="#!" data-activates="slide-out" ng-click="mainController.test()" class="brand-logo"><i
+                    class="material-icons">menu</i>Tech-News</a>
+            <ul id=<ul id=<id=<id=<id="-mobile" class="right hide-on-med-and-down">
+                <li><a href="#">Item 1</a></li>
+                <li><a href="#">Item 2</a></li>
+                <li><a href="#">Item 3</a></li>
+                <li><a class="dropdown-button" href="#!" data-activates="dropdown1"><i
+                        class="material-icons right">more_vert</i></a></li>
+            </ul>
+        </div>
+    </nav>
+</div>
+
+<!--Main content and injected views-->
+<div id="main">
+    <!--Where content is injected-->
+    <div ng-view></div>
+</div>
+
+<!--Footer-->
+<footer class="page-footer toolbar">
+    <div class="container">
+        <div class="row">
+            <div class="col l6 s12">
+                <h5 class="white-text">Footer Content</h5>
+                <p class="grey-text text-lighten-4">Lorem ipsum dolor sit amet, volumus gubergren per ea, saperet
+                    salutatus patrioque eu est.</p>
+            </div>
+            <div class="col l4 offset-l2 s12">
+                <h5 class="white-text">Links</h5>
+                <ul>
+                    <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
+                    <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            © 2016 Copyright Tech-News
+            <a class="grey-text text-lighten-4 right" href="#!">Company Name</a>
+        </div>
+    </div>
+</footer>
+
+
+</body>
+
+<!--Angular-->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-route.js"></script>
+<!--jQuery-->
+<script src="https://code.jquery.com/jquery-3.1.0.min.js"
+        integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
+<!--Firebase-->
+<script src="https://www.gstatic.com/firebasejs/3.3.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.3.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.3.0/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.3.0/firebase.js"></script>
+<script src="js/initialize-firebase.js"></script>
+<!--Main Scripts-->
+<script src="app/app.js"></script>
+<script src="app/services.js"></script>
+<script src="app/controllers.js"></script>
+<script src="js/side-menu.js"></script>
+<!--Materialize-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
+
+</html>

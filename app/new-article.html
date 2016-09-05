@@ -1,0 +1,23 @@
+<!--Create a new article-->
+<div ng-cloak>
+    <h2>New Article</h2>
+    <div class="row">
+        <form class="col s12">
+            <div class="row">
+                <div class="input-field col s12">
+                    <input id="articleTitleInput" type="text" class="validate">
+                    <label for="articleTitleInput">Title</label>
+                </div>
+                <div class="input-field col s12">
+                    <textarea id="articleDescriptionInput" class="materialize-textarea"></textarea>
+                    <label for="articleDescriptionInput">Description</label>
+                </div>
+                <button class="waves-effect waves-light btn secondary"
+                        ng-click="mainController.createArticle('author', 'description', 'image', 'timestamp', 'title')"
+                        type="submit">Create Article
+                </button>
+                <br/>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,14 @@
+$primaryColor: #263238;
+$secondaryColor: #2196F3;
+
+.toolbar {
+  background-color: $primaryColor !important;
+}
+
+.secondary {
+  background-color: $secondaryColor !important;
+}
+
+.secondary-text {
+  color: $secondaryColor !important;
+}
