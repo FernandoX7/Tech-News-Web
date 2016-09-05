@@ -21,6 +21,11 @@ techNews.config(function ($routeProvider) {
             templateUrl: 'app/new-article/new-article.html',
             controller: 'NewArticleController as newArticleCtrl'
         })
+        // Login
+        .when('/login', {
+            templateUrl: 'app/login/login.html',
+            controller: 'LoginController as loginCtrl'
+        })
         // User Profile
         .when('/profile', {
             templateUrl: 'app/user-profile/profile.html',
