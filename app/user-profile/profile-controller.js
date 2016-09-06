@@ -35,7 +35,7 @@ angular.module('techNews').controller('ProfileController', function ($timeout, g
         getLoggedInUser.getUser().then(function (result) {
             // Connect back to the scope
             $timeout(function () {
-                console.log('Attempting to get the logged in user resulted in the following promise (user) ', result);
+                // console.log('Attempting to get the logged in user resulted in the following promise (user) ', result);
                 vm.user = result;
             }, 0);
         });
