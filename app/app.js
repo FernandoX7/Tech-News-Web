@@ -37,4 +37,4 @@ techNews.config(function ($routeProvider) {
             controller: 'ProfileController as profileCtrl'
         })
         .otherwise({redirectTo: '/'});
-});
+}); // End of routing

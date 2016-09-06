@@ -1,17 +1,26 @@
 /**
  * Created by fernandoramirez on 9/4/16.
  */
-angular.module('techNews').controller('ProfileController', function ($timeout) {
+angular.module('techNews').controller('ProfileController', function ($timeout, getLoggedInUser) {
 
     var vm = this;
 
     // Public functions
+    vm.init = init;
     vm.editProfile = editProfile;
     vm.saveChanges = saveChanges;
+    vm.getCurrentUser = getCurrentUser;
 
     // Public properties
     vm.isEditingProfile = false;
-    vm.user = {};
+    vm.user = {}; // Update the properties with the users - if they are logged in
+
+    // Initialize whatever needs to be initialized :p
+    init();
+
+    function init() {
+        getCurrentUser();
+    }
 
     function editProfile() {
         vm.isEditingProfile = true;
@@ -22,19 +31,14 @@ angular.module('techNews').controller('ProfileController', function ($timeout) {
         Materialize.toast('Successfully saved your changes', 2000);
     }
 
-    var commentsRef = firebase.database().ref('users/');
-    commentsRef.on('child_added', function (data) {
-        vm.user = {
-            rights: data.val().rights,
-            username: data.val().username,
-            firstName: data.val().firstName,
-            lastName: data.val().lastName,
-            createdDate: data.val().createdDate,
-            uid: data.val().uid
-        };
-        $timeout(function () {
-            console.log('User is: ', vm.user);
-        }, 0);
-    });
+    function getCurrentUser() {
+        getLoggedInUser.getUser().then(function (result) {
+            // Connect back to the scope
+            $timeout(function () {
+                // console.log('Attempting to get the logged in user resulted in the following promise (user) ', result);
+                vm.user = result;
+            }, 0);
+        });
+    }
 
-});
+}); // End of ProfileController

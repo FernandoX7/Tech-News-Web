@@ -1,7 +1,7 @@
 /**
  * Created by fernandoramirez on 9/4/16.
  */
-angular.module('techNews').controller('RegisterController', function ($location) {
+angular.module('techNews').controller('RegisterController', function () {
 
     var vm = this;
 
@@ -44,7 +44,8 @@ angular.module('techNews').controller('RegisterController', function ($location)
 
                 console.log('Successfully registered user', createdUser);
                 Materialize.toast('Registration successful', 2000);
-                $location.path('/#home');
+                window.location = '#/home';
+                window.location.reload();
 
             }, // Handler Errors
             function (error) {

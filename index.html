@@ -21,14 +21,15 @@
         <div class="userView">
             <img class="background" src="img/default-article-image.jpg">
             <a href="#profile"><img class="circle" src="img/profile_picture.png"></a>
-            <a href="#profile"><span class="white-text name">Fernando Ramirez</span></a>
-            <a href="#profile"><span class="white-text email">framirez1997@gmail.com</span></a>
+            <a href="#profile"><span class="white-text name">{{mainController.user.firstName}} {{mainController.user.lastName}}</span></a>
+            <a href="#profile"><span class="white-text email">{{mainController.user.email}}</span></a>
         </div>
     </li>
     <li><a class="waves-effect" href="#/"><i class="material-icons">home</i>Home</a></li>
     <li><a class="waves-effect" href="#profile"><i class="material-icons">account_circle</i>Profile</a></li>
     <li><a class="waves-effect" href="#/"><i class="material-icons">motorcycle</i>Item 3</a></li>
-    <li><a class="waves-effect" ng-click="mainController.signOut()" href="#login"><i class="material-icons">security</i>Sign out</a></li>
+    <li ng-show="mainController.user.email"><a class="waves-effect" ng-click="mainController.signOut()"><i class="material-icons">security</i>Sign out</a></li>
+    <li ng-show="!mainController.user.email"><a class="waves-effect" href="#login"><i class="material-icons">security</i>Login</a></li>
     <li>
         <div class="divider"></div>
     </li>
@@ -64,7 +65,7 @@
     </ul>
     <nav class="toolbar">
         <div class="nav-wrapper">
-            <a href="#!" data-activates="slide-out" ng-click="mainController.test()" class="brand-logo"><i
+            <a href="#!" data-activates="slide-out" class="brand-logo"><i
                     class="material-icons">menu</i>Tech-News</a>
             <ul id=<ul id=<id=<id=<id="-mobile" class="right hide-on-med-and-down">
                 <li><a href="#">Item 1</a></li>
@@ -138,6 +139,7 @@
 
 <!--Services-->
 <script src="app/article-detail/article-detail-service.js"></script>
+<script src="app/services/getLoggedInUser.js"></script>
 
 <!--Materialize-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>

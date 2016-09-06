@@ -14,8 +14,12 @@
                 <div class="card-content">
                     <span class="card-title">{{profileCtrl.user.firstName}} {{profileCtrl.user.lastName}}</span>
                     <p>Email: {{profileCtrl.user.email}}</p>
-                    <p>@{{profileCtrl.user.username}}</p>
-                    <p>{{profileCtrl.user.createdDate}}</p>
+                    <p>Bio: {{profileCtrl.user.bio}}</p>
+                    <p>Created: {{profileCtrl.user.created}}</p>
+                    <p ng-if="profileCtrl.user.rights == 1">Rights: Owner</p>
+                    <p ng-if="profileCtrl.user.rights == 2">Rights: Administrator</p>
+                    <p ng-if="profileCtrl.user.rights == 3">Rights: Moderator</p>
+                    <p ng-if="profileCtrl.user.rights == 4">Rights: Editor</p>
                 </div>
                 <div class="card-action">
                     <a class="secondary-text" ng-click="profileCtrl.editProfile()">Edit profile</a>

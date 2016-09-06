@@ -1,22 +1,23 @@
 /**
  * Created by fernandoramirez on 9/4/16.
  */
-angular.module('techNews').controller('MainController', ['$scope', '$timeout', 'passArticleDataService',
-    function ($scope, $timeout, passArticleDataService) {
+angular.module('techNews').controller('MainController', ['$scope', '$timeout', 'passArticleDataService', 'getLoggedInUser',
+    function ($scope, $timeout, passArticleDataService, getLoggedInUser) {
 
         var vm = this;
         // Public Functions
-        vm.test = test;
+        vm.init = init;
         vm.getCurrentUser = getCurrentUser;
         vm.signOut = signOut;
 
         // Public Properties
         vm.articles = [];
-        vm.user = vm.getCurrentUser();
+        vm.user = {}; // Update the properties with the users - if they are logged in
 
-        if (vm.user) {
-            // User is logged in.
-            console.log('User currently logged in', vm.user.email);
+        init();
+
+        function init() {
+            getCurrentUser();
         }
 
         // Listen for data
@@ -68,23 +69,27 @@ angular.module('techNews').controller('MainController', ['$scope', '$timeout', '
             // pseudocode - deleteArticle(data.key)
         });
 
-        function test() {
-            console.log('Test function ran');
+        function getCurrentUser() {
+            getLoggedInUser.getUser().then(function (result) {
+                // Connect back to the scope
+                $timeout(function () {
+                    // console.log('Logged in user is ', result);
+                    vm.user = result;
+                }, 0);
+            });
         }
 
-    }]);
+        function signOut() {
+            firebase.auth().signOut().then(function () {
+                // Sign-out successful.
+                Materialize.toast('Sign out successful', 2000);
+                window.location = '#/login';
+                window.location.reload();
+            }, function (error) {
+                Materialize.toast('Error trying to sign out', 2000);
+                console.log('Error trying to sign out user: ', error);
+            });
+        }
 
-function getCurrentUser() {
-    var user = firebase.auth().currentUser;
-    return user;
-}
+    }]); // End of MainController
 
-function signOut() {
-    firebase.auth().signOut().then(function () {
-        // Sign-out successful.
-        Materialize.toast('Sign out successful', 2000);
-    }, function (error) {
-        Materialize.toast('Error trying to sign out', 2000);
-        console.log('Error trying to sign out user: ', error);
-    });
-}
