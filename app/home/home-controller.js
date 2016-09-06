@@ -9,6 +9,7 @@ angular.module('techNews').controller('MainController', ['$scope', '$timeout', '
         vm.init = init;
         vm.getCurrentUser = getCurrentUser;
         vm.signOut = signOut;
+        vm.goToArticleDetail = goToArticleDetail;
 
         // Public Properties
         vm.articles = [];
@@ -35,7 +36,6 @@ angular.module('techNews').controller('MainController', ['$scope', '$timeout', '
             };
             $timeout(function () {
                 vm.articles.push(article);
-                passArticleDataService.addArticleList(vm.articles);
             }, 0);
             // console.log('[child-added]', article);
         });
@@ -89,6 +89,13 @@ angular.module('techNews').controller('MainController', ['$scope', '$timeout', '
                 Materialize.toast('Error trying to sign out', 2000);
                 console.log('Error trying to sign out user: ', error);
             });
+        }
+
+        function goToArticleDetail(index) {
+            var selectedArticle = vm.articles[index];
+            // console.log('User clicked on', selectedArticle);
+            // Pass the data over to the service so we can retrieve it in article-detail
+            passArticleDataService.addArticleList(selectedArticle);
         }
 
     }]); // End of MainController

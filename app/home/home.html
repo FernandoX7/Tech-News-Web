@@ -9,7 +9,7 @@
             <div class="card-content">
                 <span class="card-title" style="line-height: 30px;">{{article.title}}</span>
                 <br/>
-                <p class="md-subhead">{{article.description | limitTo: 500}} {{article.description.length > 500 ?
+                <p class="md-subhead">{{article.description | limitTo: 300}} {{article.description.length > 300 ?
                     '...'
                     : ''}}</p>
                 <span class="md-caption">{{article.timestamp}}</span>
@@ -17,7 +17,7 @@
                 <span class="md-caption">{{article.author}}</span>
             </div>
             <div class="card-action">
-                <a href="#article-detail">Learn more</a>
+                <a ng-click="mainController.goToArticleDetail($index)" href="#article-detail">Learn more</a>
             </div>
         </div>
     </div>
