@@ -8,12 +8,11 @@ angular.module('techNews').controller('ProfileController', function ($timeout) {
     // Public functions
     vm.editProfile = editProfile;
     vm.saveChanges = saveChanges;
+    vm.getCurrentUser = getCurrentUser;
 
     // Public properties
     vm.isEditingProfile = false;
-    vm.firebaseUser = firebase.auth().currentUser;
-    vm.user = {};
-    vm.userUid = '';
+    vm.user = vm.getCurrentUser();
 
     function editProfile() {
         vm.isEditingProfile = true;
@@ -24,20 +23,22 @@ angular.module('techNews').controller('ProfileController', function ($timeout) {
         Materialize.toast('Successfully saved your changes', 2000);
     }
 
-    // Get the currently logged in user
-    if (vm.firebaseUser) {
-        // User is signed in.
-        // Set the uid of the firebase user so we can retrieve the user from the db by their uid
-        vm.userUid = vm.firebaseUser.uid;
+    function getCurrentUser() {
+        firebase.auth().onAuthStateChanged(function (user) {
+            if (user) {
+                // User is signed in.
+                // Now get the specific user from the db using userRef to get the right reference to them
+                var userRef = firebase.database().ref('users/' + user.uid);
+                userRef.on('value', function (snapshot) {
+                    user = snapshot.val();
+                    // console.log('A user is logged in', user);
+                    // Connect back to scope
+                    $timeout(function () {
+                        vm.user = user;
+                    }, 0);
+                });
+            }
+        });
     }
-
-    var userRef = firebase.database().ref('users/' + vm.userUid);
-    userRef.on('value', function (snapshot) {
-        vm.user = snapshot.val();
-        // Use $timeout to reconnect the scope
-        $timeout(function () {
-            console.log('Current user is', vm.user);
-        }, 0);
-    });
 
 }); // End of ProfileController
