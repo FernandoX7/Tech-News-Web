@@ -28,7 +28,7 @@
     <li><a class="waves-effect" href="#/"><i class="material-icons">home</i>Home</a></li>
     <li><a class="waves-effect" href="#profile"><i class="material-icons">account_circle</i>Profile</a></li>
     <li><a class="waves-effect" href="#/"><i class="material-icons">motorcycle</i>Item 3</a></li>
-    <li ng-show="mainController.user != undefined"><a class="waves-effect" ng-click="mainController.signOut()" href="#login"><i class="material-icons">security</i>Sign out</a></li>
+    <li ng-show="mainController.user.email"><a class="waves-effect" ng-click="mainController.signOut()" href="#login"><i class="material-icons">security</i>Sign out</a></li>
     <li>
         <div class="divider"></div>
     </li>
@@ -64,7 +64,7 @@
     </ul>
     <nav class="toolbar">
         <div class="nav-wrapper">
-            <a href="#!" data-activates="slide-out" ng-click="mainController.test()" class="brand-logo"><i
+            <a href="#!" data-activates="slide-out" class="brand-logo"><i
                     class="material-icons">menu</i>Tech-News</a>
             <ul id=<ul id=<id=<id=<id="-mobile" class="right hide-on-med-and-down">
                 <li><a href="#">Item 1</a></li>
