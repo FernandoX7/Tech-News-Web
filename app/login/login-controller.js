@@ -1,7 +1,7 @@
 /**
  * Created by fernandoramirez on 9/4/16.
  */
-angular.module('techNews').controller('LoginController', function ($location) {
+angular.module('techNews').controller('LoginController', function () {
 
     vm = this;
 
@@ -33,7 +33,8 @@ angular.module('techNews').controller('LoginController', function ($location) {
             // Login was successful
             Materialize.toast('Successfully logged in', 2000);
             console.log('Successfully logged in user: ', user);
-            $location.path('/#home');
+            window.location = '#/home';
+            window.location.reload();
         }, function (error) { // Handler Errors
             // Handle Errors here.
             var errorCode = error.code;

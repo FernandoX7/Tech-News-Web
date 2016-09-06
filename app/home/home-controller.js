@@ -83,6 +83,8 @@ angular.module('techNews').controller('MainController', ['$scope', '$timeout', '
             firebase.auth().signOut().then(function () {
                 // Sign-out successful.
                 Materialize.toast('Sign out successful', 2000);
+                window.location = '#/login';
+                window.location.reload();
             }, function (error) {
                 Materialize.toast('Error trying to sign out', 2000);
                 console.log('Error trying to sign out user: ', error);
