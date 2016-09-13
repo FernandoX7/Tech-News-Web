@@ -1,20 +1,105 @@
+<!--Toolbar-->
+<div class="navbar-fixed">
+    <!--Dropdown list-->
+    <ul id="dropdown1" class="dropdown-content">
+        <li ng-show="!mainController.cardView"><a ng-click="mainController.switchToCardView();">Switch to Card View</a></li>
+        <li ng-show="mainController.cardView"><a ng-click="mainController.switchToListView();">Switch to List View</a></li>
+        <li><a href="#!">Two</a></li>
+        <li class="divider"></li>
+        <li><a href="#!">Settings</a></li>
+    </ul>
+    <nav class="toolbar">
+        <div class="nav-wrapper">
+            <a href="#!" data-activates="slide-out" class="brand-logo"><i
+                    class="material-icons">menu</i>Tech-News</a>
+            <ul id=<ul id=<id=<id=<id="-mobile" class="right hide-on-med-and-down">
+                <li><a href="#">Item 1</a></li>
+                <li><a href="#">Item 2</a></li>
+                <li><a href="#">Item 3</a></li>
+                <li><a class="dropdown-button" href="#!" data-activates="dropdown1"><i
+                        class="material-icons right">more_vert</i></a></li>
+            </ul>
+        </div>
+    </nav>
+</div>
+
+<!--Column of something...TODO-->
+<div style="float: right; margin-right: 10px;">
+    <ul class="collection"
+        style="border: none !important; box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12); margin-top: 0">
+        <li class="collection-item avatar">
+            <img src="img/default-article-image.jpg" alt="" class="circle">
+            <span class="title">Title</span>
+            <p>First Line <br>
+                Second Line
+            </p>
+            <a style="color: deepskyblue" href="#!" class="secondary-content"><i class="material-icons">cloud</i></a>
+        </li>
+        <li class="collection-item avatar">
+            <i class="material-icons circle">folder</i>
+            <span class="title">Title</span>
+            <p>Lorem ipsum dolor sit amet, mea.<br>
+                Second Line
+            </p>
+            <a style="color: deepskyblue" href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+        </li>
+        <li class="collection-item avatar">
+            <i class="material-icons circle green">insert_chart</i>
+            <span class="title">Title</span>
+            <p>First Line <br>
+                Second Line
+            </p>
+            <a style="color: deepskyblue" href="#!" class="secondary-content"><i class="material-icons">cloud</i></a>
+        </li>
+        <li class="collection-item avatar">
+            <i class="material-icons circle red">play_arrow</i>
+            <span class="title">Title</span>
+            <p>First Line <br>
+                Second Line
+            </p>
+            <a style="color: deepskyblue" href="#!" class="secondary-content"><i class="material-icons">star</i></a>
+        </li>
+    </ul>
+
+</div>
+
+<!--Article List View-->
+<ul ng-show="!mainController.cardView" class="collection"
+    style="width: 75%; margin-left: 0.75rem; border: none !important; box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);">
+    <li ng-repeat="article in mainController.articles"
+        style="padding-left: 150px; border-bottom: 1px solid rgba(0,0,0,0.05)" class="collection-item avatar">
+        <img style="border-radius: 0; width: 120px; height: 88%;" ng-src="{{article.image}}" alt="" class="circle">
+        <span style="font-family: 'Roboto-Bold', sans-serif; font-size: 1.4rem" class="title">{{article.title}}</span>
+        <p style="margin-top: 7px; font-family: 'Roboto', sans-serif;">{{article.description | limitTo: 380}}
+            {{article.description.length > 380 ?
+            '...'
+            : ''}}</p>
+        <p style="margin-top: 7px; font-family: 'Roboto-Bold', sans-serif;">{{article.timestamp}} |
+            {{article.author}}</p>
+        <div style="margin-top: 7px" class="card-action">
+            <a ng-click="mainController.goToArticleDetail($index)" href="#article-detail">Learn more</a>
+        </div>
+    </li>
+</ul>
+
+
 <!--Article Card View-->
-<div class="row" ng-repeat="article in mainController.articles">
+<div ng-show="mainController.cardView" class="row" ng-repeat="article in mainController.articles">
     <div class="col s12 m7">
         <div class="card">
             <div class="card-image">
                 <img ng-src="{{article.image}}" style="height: 400px;">
-                <!--<span class="card-title">{{article.title}}</span>-->
+                <span style="font-family: 'Roboto-Bold', sans-serif;background: rgba(0, 0, 0, 0.50);  width: 100%;"
+                      class="card-title">{{article.title}}</span>
             </div>
             <div class="card-content">
-                <span class="card-title" style="line-height: 30px;">{{article.title}}</span>
-                <br/>
-                <p class="md-subhead">{{article.description | limitTo: 300}} {{article.description.length > 300 ?
+
+                <p class="md-subhead">{{article.description | limitTo: 150}} {{article.description.length > 150 ?
                     '...'
                     : ''}}</p>
-                <span class="md-caption">{{article.timestamp}}</span>
-                <span>|</span>
-                <span class="md-caption">{{article.author}}</span>
+                <span style="font-family: 'Roboto-Bold', sans-serif" class="md-caption">{{article.timestamp}}</span>
+                <span style="font-family: 'Roboto-Bold', sans-serif">|</span>
+                <span style="font-family: 'Roboto-Bold', sans-serif" class="md-caption">{{article.author}}</span>
             </div>
             <div class="card-action">
                 <a ng-click="mainController.goToArticleDetail($index)" href="#article-detail">Learn more</a>

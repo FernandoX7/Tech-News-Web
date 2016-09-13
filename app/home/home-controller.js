@@ -10,10 +10,13 @@ angular.module('techNews').controller('MainController', ['$scope', '$timeout', '
         vm.getCurrentUser = getCurrentUser;
         vm.signOut = signOut;
         vm.goToArticleDetail = goToArticleDetail;
+        vm.switchToCardView = switchToCardView;
+        vm.switchToListView = switchToListView;
 
         // Public Properties
         vm.articles = [];
         vm.user = {}; // Update the properties with the users - if they are logged in
+        vm.cardView = false;
 
         init();
 
@@ -96,6 +99,24 @@ angular.module('techNews').controller('MainController', ['$scope', '$timeout', '
             // console.log('User clicked on', selectedArticle);
             // Pass the data over to the service so we can retrieve it in article-detail
             passArticleDataService.addArticleList(selectedArticle);
+        }
+
+        function switchToCardView() {
+            Materialize.toast('Switching to card view', 2000);
+            setTimeout(function () {
+                $scope.$apply(function(){
+                    vm.cardView = true;
+                });
+            }, 1000);
+        }
+
+        function switchToListView() {
+            Materialize.toast('Switching to list view', 2000);
+            setTimeout(function () {
+                $scope.$apply(function(){
+                    vm.cardView = false;
+                });
+            }, 1000);
         }
 
     }]); // End of MainController
